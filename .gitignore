@@ -1,0 +1,17 @@
+# Apenas o frontend atual
+/frontend/SocialGuard/node_modules/
+/frontend/SocialGuard/dist/
+/frontend/SocialGuard/dist-ssr/
+/frontend/SocialGuard/*.local
+/frontend/SocialGuard/logs/
+
+# Logs do frontend atual
+/frontend/SocialGuard/*.log
+/frontend/SocialGuard/npm-debug.log*
+/frontend/SocialGuard/yarn-debug.log*
+/frontend/SocialGuard/pnpm-debug.log*
+
+# Arquivos gerais do repositório
+.DS_Store
+.idea
+.vscode/*
