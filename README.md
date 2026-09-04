@@ -1,75 +1,33 @@
-# React + TypeScript + Vite
+# SocialGuard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Plataforma para classificação automatizada de conteúdo de redes sociais utilizando Inteligência Artificial, com foco em **escalabilidade, processamento assíncrono e desacoplamento da camada de classificação**.
 
-Currently, two official plugins are available:
+> Projeto acadêmico desenvolvido para a disciplina de Arquitetura de Software.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Sobre o projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O SocialGuard é uma plataforma projetada para analisar publicações de redes sociais e classificá-las de acordo com possíveis violações de políticas ou critérios previamente definidos.
 
-## Expanding the ESLint configuration
+A solução foi concebida para trabalhar com dois modos principais de processamento:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Análise síncrona:** processamento individual de uma publicação, com retorno imediato do resultado.
+- **Análise em lote:** processamento assíncrono de grandes volumes de publicações, permitindo que o usuário acompanhe o progresso sem manter uma requisição HTTP aberta durante todo o processamento.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+O projeto tem como principal objetivo explorar como decisões de **Arquitetura de Software** podem melhorar a escalabilidade e a eficiência de aplicações que utilizam modelos de Inteligência Artificial para processamento de grandes volumes de dados.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Problema
 
-```
+Uma abordagem simples para classificar publicações utilizando IA consiste em enviar cada publicação diretamente para o modelo:
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```text
+Publicação
+    ↓
+API
+    ↓
+Modelo de IA
+    ↓
+Resultado
